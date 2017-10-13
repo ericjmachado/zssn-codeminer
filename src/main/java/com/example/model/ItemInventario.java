@@ -8,21 +8,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-@Entity
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity 
 public class ItemInventario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING) 
 	private TipoItem tipo;
 
 	private int qtdItem;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne 
 	private Inventario inventario;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -54,6 +57,4 @@ public class ItemInventario {
 	public void setInventario(Inventario inventario) {
 		this.inventario = inventario;
 	}
-	
-	
 }

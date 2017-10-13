@@ -18,8 +18,8 @@ public class RelatorioInfeccao {
 
 	@ManyToOne
 	private Sobrevivente sobreviventeInfectado;
-
-	public Sobrevivente getSobreviventeRelator() {
+	
+	public Sobrevivente getSobreviventeRelator() { 
 		return sobreviventeRelator;
 	}
 

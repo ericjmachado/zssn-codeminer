@@ -21,21 +21,21 @@ public class Sobrevivente {
 	@Column(nullable=true)
 	private int idade;
 
-	@Column(nullable=true)
+	@Column(nullable=true) 
 	private char sexo;
 
-	@Column(nullable=true)
+	@Column(nullable=true) 
 	private double latitude;
 
-	@Column(nullable=true)
+	@Column(nullable=true) 
 	private double longitude;
 
-	@Column(nullable=true)
+	@Column(nullable=true) 
 	private boolean infectado;
 
 	@OneToOne(optional=true, cascade=CascadeType.PERSIST)
 	private Inventario inventario;
-
+	
 	public long getId() {
 		return id;
 	}
@@ -99,5 +99,4 @@ public class Sobrevivente {
 	public void setInfectado(boolean infectado) {
 		this.infectado = infectado;
 	}
-
 }

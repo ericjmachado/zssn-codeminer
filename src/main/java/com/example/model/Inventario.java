@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Inventario {
 
@@ -18,13 +20,15 @@ public class Inventario {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
-	@OneToOne
-	private Sobrevivente sobrevivente;
+	@JsonIgnore
+	@OneToOne 
+	private Sobrevivente sobrevivente; 
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventario", cascade = CascadeType.ALL)
 	private List<ItemInventario> itens;
-
-	public List<ItemInventario> getItens() {
+	
+	
+	public List<ItemInventario> getItens() { 
 		return itens;
 	}
 
