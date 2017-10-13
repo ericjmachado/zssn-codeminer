@@ -103,32 +103,68 @@ public class SobreviventeService {
 		
 		this.definePercentuais(relatorio, qtdTotal);
 		
-		calculaQtdAguaPorSobrevivente(relatorio, qtdTotal);
+		this.calculaQtdAguaPorSobrevivente(relatorio, qtdTotal);
 		
-		Integer qtdComida = this.inventarioRepository.obterQuantidadeComida();
+		this.calculaQtdComidaPorSobrevivente(relatorio, qtdTotal);
 		
-		Integer mediaComida = (qtdComida/qtdTotal);
+		this.calculaQtdMedicacaoPorSobrevivente(relatorio, qtdTotal);
 		
-		relatorio.setQtdComidaPorSobrevivente(mediaComida.toString());
-		
-		Integer qtdMedicacao = this.inventarioRepository.obterQuantidadeMedicacao();
-		
-		Integer mediaMedicacao = (qtdMedicacao/qtdTotal);
-		
-		relatorio.setQtdMedicacaoPorSobrevivente(mediaMedicacao.toString());
-		
-		Integer qtdMunicao = this.inventarioRepository.obterQuantidadeMunicao();
-		
-		Integer mediaMunicao = (qtdMunicao/qtdTotal);
-		
-		relatorio.setQtdMunicaoPorSobrevivente(mediaMunicao.toString());
+		this.calculaQtdMunicaoPorSobrevivente(relatorio, qtdTotal);
 		
 		calculaPontosPerdidos(relatorio);
 		
 		return relatorio;
 	}
 
+	/**
+	 * Método para calcular quantidade a média de munição por sobrevivente.
+	 * @param relatorio
+	 * @param qtdTotal
+	 */
+	private void calculaQtdMunicaoPorSobrevivente(Relatorio relatorio, Integer qtdTotal) {
+		
+		Integer qtdMunicao = this.inventarioRepository.obterQuantidadeMunicao();
+		
+		Integer mediaMunicao = (qtdMunicao/qtdTotal);
+		
+		relatorio.setQtdMunicaoPorSobrevivente(mediaMunicao.toString());
+	}
+
+	/**
+	 * Método para calcular quantidade a média de medicação por sobrevivente.
+	 * @param relatorio
+	 * @param qtdTotal
+	 */
+	private void calculaQtdMedicacaoPorSobrevivente(Relatorio relatorio, Integer qtdTotal) {
+		
+		Integer qtdMedicacao = this.inventarioRepository.obterQuantidadeMedicacao();
+		
+		Integer mediaMedicacao = (qtdMedicacao/qtdTotal);
+		
+		relatorio.setQtdMedicacaoPorSobrevivente(mediaMedicacao.toString());
+	}
+
+	/**
+	 * Método para calcular quantidade a média de comida por sobrevivente.
+	 * @param relatorio
+	 * @param qtdTotal
+	 */
+	private void calculaQtdComidaPorSobrevivente(Relatorio relatorio, Integer qtdTotal) {
+		
+		Integer qtdComida = this.inventarioRepository.obterQuantidadeComida();
+		
+		Integer mediaComida = (qtdComida/qtdTotal);
+		
+		relatorio.setQtdComidaPorSobrevivente(mediaComida.toString());
+	}
+
+	/**
+	 * Método para calcular quantidade a média de água por sobrevivente.
+	 * @param relatorio
+	 * @param qtdTotal
+	 */
 	private void calculaQtdAguaPorSobrevivente(Relatorio relatorio, Integer qtdTotal) {
+		
 		Integer qtdAgua = this.inventarioRepository.obterQuantidadeAgua();
 		
 		Integer mediaAgua = (qtdAgua/qtdTotal);
@@ -136,6 +172,10 @@ public class SobreviventeService {
 		relatorio.setQtdAguaPorSobrevivente(mediaAgua.toString());
 	}
 
+	/**
+	 * Método para calcular pontos perdidos por sobreviventes infectados.
+	 * @param relatorio
+	 */
 	private void calculaPontosPerdidos(Relatorio relatorio) {
 		
 		List<Sobrevivente> lista = this.repository.findAll();
@@ -159,6 +199,11 @@ public class SobreviventeService {
 		});
 	}
 
+	/**
+	 * Método para definir as porcentagens de infectados e não infectados
+	 * @param relatorio
+	 * @param qtdTotal
+	 */
 	private void definePercentuais(Relatorio relatorio, Integer qtdTotal) {
 		
 		Integer qtdInfectado = this.repository.obterQtdInfectado();
